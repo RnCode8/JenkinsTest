@@ -1,6 +1,13 @@
 pipeline {
     agent any
 
+    stage('Check Java') {
+        steps {
+            sh 'java -version'
+            sh 'mvn -v'
+        }
+    }
+
     stages {
         stage('Compile') {
             steps {
