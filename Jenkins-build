@@ -2,10 +2,17 @@ pipeline {
     agent any
 
     stages {
-        stage('Check Java') {
+        stage('Compile') {
             steps {
-                sh 'java -version'
-                sh 'mvn -v'
+                echo 'Compiling project...'
+                sh 'mvn compile'
+            }
+        }
+
+        stage('Trigger Test Job') {
+            steps {
+                echo 'Triggering test job...'
+                build job: 'pipeline-test'
             }
         }
     }
