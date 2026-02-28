@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Compile') {
+            steps {
+                echo 'Compiling project...'
+                sh 'mvn clean compile'
+            }
+        }
+
+        stage('Trigger Test Job') {
+            steps {
+                echo 'Triggering test job...'
+                build job: 'Pipeline-Test'
+            }
+        }
+    }
+}
